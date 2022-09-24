@@ -1,5 +1,14 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
+import SearchBar from "./components/SearchBar";
+import SearchError from "./components/SearchError";
+import SearchHint from "./components/SearchHint";
+import SearchResults from "./components/SearchResults";
+import ActionsContext from "./contexts/ActionsContext";
+import ApiStateContext from "./contexts/ApiStateContext";
+import KeywordStateContext from "./contexts/KeywordStateContext";
+
+// Context
 
 // https://swapi.dev/api/people/?search=dar
 function SwapiApp() {
@@ -7,65 +16,39 @@ function SwapiApp() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  function handleKeyword(event) {
-    setKeyword(event.target.value);
-  }
 
-  function handleSearch() {
-    console.log('Searching for', keyword);
-    setLoading(true);
-    setError(null);
-    setResults([]);
-    fetch('https://swapi.dev/api/people/?search=' + keyword)
-      .then((response) => {
-        console.log(response.status)
-        return response.json();
-      })
-      .then(response => {
-        setResults(response.results);
-        setLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-        console.log({ error });
-      });
-  }
+  const actionsValue = useMemo(() => {
+    return {
+      setKeyword,
+      setResults,
+      setLoading,
+      setError,
+    }
+  }, [setKeyword, setResults, setLoading, setError]);
+
+  const apiState = useMemo(() => {
+    return {
+      results,
+      loading,
+      error
+    }
+  }, [results, loading, error]);
 
   return (
-    <div>
-      <div className="search-bar">
-        <input
-          onChange={handleKeyword}
-          value={keyword}
-          type="text"
-        />
-        <button onClick={handleSearch}>Search</button>
-      </div>
-      <div className="search-results">
-        {
-          keyword.length > 0
-            ? <div>Search results for {keyword}...</div>
-            : null
-        }
-        {
-          error ? <div>{error.message}</div> : null
-        }
-        {
-          loading
-            ? <div>Loading...</div>
-            : (
-              <ul>
-                {
-                  results.map(item => (
-                    <li>{item.name}</li>
-                  ))
-                }
-              </ul>
-            )
-        }
-      </div>
-    </div>
+    <ActionsContext.Provider value={actionsValue}>
+      <KeywordStateContext.Provider value={keyword}>
+        <ApiStateContext.Provider value={apiState}>
+          <div>
+            <SearchBar />
+            <div className="search-results">
+              <SearchHint />
+              <SearchError />
+              <SearchResults />
+            </div>
+          </div>
+        </ApiStateContext.Provider>
+      </KeywordStateContext.Provider>
+    </ActionsContext.Provider>
   );
 }
 
