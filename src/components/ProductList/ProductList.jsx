@@ -49,18 +49,20 @@ function getProductsApi(callback) {
 
 // Products is set
 // API call triggered - 
-function ProductList({ prop1 }) {
+function ProductList() {
   // `useState` should be used when you need a dynamic variable
   // which your UI logic depends or the variable can cause some
   // changes in UI.
-  const loadingState = useState(true);
-  // [value, setValue]
-  const isLoading = loadingState[0];
-  const setIsLoading = loadingState[1];
+  // const loadingState = useState(true);
+  // // [value, setValue]
+  // const isLoading = loadingState[0];
+  // const setIsLoading = loadingState[1];
+  const [isLoading, setIsLoading] = useState(true);
 
-  const productsState = useState([]);
-  const products = productsState[0];
-  const setProducts = productsState[1];
+  // const productsState = useState([]);
+  // const products = productsState[0];
+  // const setProducts = productsState[1];
+  const [products, setProducts] = useState([]);
 
   // `useEffect` should be used whenever you need to 
   // detect some react lifecycle event.
@@ -71,8 +73,7 @@ function ProductList({ prop1 }) {
       setProducts(res);
       // console.log('API call ended', isLoading, products);
     });
-  }, [products, isLoading]);
-  
+  }, []);
   
   
   if (isLoading) {
