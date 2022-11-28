@@ -2,41 +2,6 @@ import { useEffect, useState } from "react";
 
 import ProductCard from "../ProductCard";
 
-const globalProducts = [
-  {
-    title: "Apple iPhone 14",
-    price: "Rs. 1,00,000"
-  },
-  {
-    title: "Apple iPhone 13",
-    price: "Rs. 70,000"
-  },
-  {
-    title: "Google Pixel 7",
-    price: "Rs. 50,000"
-  },
-  {
-    title: "Nokia 1100",
-    price: "Rs. 2,000"
-  },
-  {
-    title: "Samsung Galaxy S10",
-    price: "Rs. 1,00,000"
-  },
-  {
-    title: "Sony Xperia S10",
-    price: "Rs. 1,00,000"
-  }
-]
-
-function getProductsApi(callback) {
-  console.log('API called');
-  setTimeout(function () {
-    callback(globalProducts);
-  }, 3000);
-}
-
-
 // First time
 // isLoading = true;
 // products = [];
@@ -64,19 +29,45 @@ function ProductList() {
   // const setProducts = productsState[1];
   const [products, setProducts] = useState([]);
 
+  const [error, setError] = useState(null);
+
   // `useEffect` should be used whenever you need to 
   // detect some react lifecycle event.
   useEffect(() => {
-    // console.log('API call started', isLoading, products);
-    getProductsApi(function(res) {
-      setIsLoading(false);
-      setProducts(res);
-      // console.log('API call ended', isLoading, products);
-    });
+    // const promise = fetch('http://localhost:3001/products');
+    // promise.then(response => {
+    //   const promise1 = response.json()
+    //   promise1.then(result => {
+    //     console.log('Mock result', result);
+    //   });
+
+    //   promise1.catch(error => {
+    //     console.log('Mock result error', error);
+    //   });
+    // });
+    // promise.catch(error => {
+    //   console.log('Mock Error', error);
+    // })
+
+    fetch('http://localhost:3002/products')
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        setIsLoading(false);
+        setProducts(result);
+      })
+      .catch(error => {
+        console.log('Error');
+        setError(error);
+      })
   }, []);
   
-  
-  if (isLoading) {
+  // Falsy values:  false, null, undefined, '', 0
+  // Truthy values: Any other than falsy
+  if (error) {
+    return <div>{error.message}</div>;
+  } else if (isLoading) {
     return <div>Loading...</div>;
   } else {
     return (
