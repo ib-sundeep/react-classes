@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './App';
 
 import './index.css';
-import ProductList from './components/ProductList';
-import CountDown from './components/CountDown';
+
+// import CountDown from './components/CountDown';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -14,10 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // 2. File extension should .jsx
 // 3. Component also should use PascalCase
 root.render(
-  <div>
-    <CountDown startFrom={5} />
-    <ProductList />
-  </div>
+  <App />
 );
 
 // We will start at 9:05pm

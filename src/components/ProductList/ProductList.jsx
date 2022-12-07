@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 import ProductCard from "../ProductCard";
 
@@ -16,6 +16,7 @@ import ProductCard from "../ProductCard";
 // Products is set
 // API call triggered - 
 function ProductList() {
+  console.log('ProductList rendered');
   // `useState` should be used when you need a dynamic variable
   // which your UI logic depends or the variable can cause some
   // changes in UI.
@@ -64,7 +65,7 @@ function ProductList() {
 
     loadProducts();
   }, []);
-  
+
   // Falsy values:  false, null, undefined, '', 0
   // Truthy values: Any other than falsy
   if (error) {
@@ -76,8 +77,13 @@ function ProductList() {
       <div>
         {/* [Nodes] */}
         {
-          products.map(function(product, index) {
-            return <ProductCard key={index} title={product.title} price={product.price} />
+          products.map(function(product) {
+            return (
+              <ProductCard
+                key={product.id}
+                product={product}
+              />
+            )
           })
         }
       </div>
@@ -85,7 +91,9 @@ function ProductList() {
   }
 }
 
-export default ProductList;
+export default memo(ProductList);
+
+// export default ProductList;
 
 // oldDom = [
 //   <ProductCard key={0} title="Title 1" />,
