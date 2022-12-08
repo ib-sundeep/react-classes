@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import CartContext from '../../contexts/CartContext';
-
+import AddToCart from '../AddToCart';
 import styles from './Cart.module.css';
 
 // {
@@ -22,14 +22,25 @@ function Cart() {
     );
   } else {
     return (
-      <ol>
-        {cartList.map(cartItem => (
-          <li key={cartItem.id}>
-            <div>{cartItem.title}</div>
-            <div>Quantity: {cartItem.quantity}</div>
-          </li>
-        ))}
-      </ol>
+      <div className={styles.cart}>
+        <ol>
+          {cartList.map(cartItem => (
+            <li className={styles.cartItem} key={cartItem.id}>
+              <div>
+                <div>{cartItem.title}</div>
+                <div className={styles.cartItemPrice}>₹ {cartItem.price} X {cartItem.quantity} = <strong>₹ {cartItem.price*cartItem.quantity}</strong> </div>
+                <span className={styles.addToCart}>
+                  <AddToCart product={cartItem} />
+                </span><br /><br />
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div className={styles.cartTotal}>
+            Cart Total :<strong> ₹ {cartList.reduce((C,cartItem) => cartItem.price*cartItem.quantity + C,0)}</strong>
+        </div>
+
+      </div>
     )
   }
 }
