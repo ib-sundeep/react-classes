@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from "react";
 
-import CartContext from '../../contexts/CartContext';
+import CartContext from "../../contexts/CartContext";
 
-import styles from './Cart.module.css';
+import styles from "./Cart.module.css";
 
 // {
 //   '1': { id: '1' },
@@ -13,24 +13,27 @@ import styles from './Cart.module.css';
 function Cart() {
   const { cart } = useContext(CartContext);
   const cartList = Object.values(cart);
-
-  console.log('Cart rendered');
+  const [cartTotal, setCartTotal] = useState(0);
 
   if (cartList.length === 0) {
-    return (
-      <div className={styles.cart}>No items in the cart!</div>
-    );
+    return <div className={styles.cart}>No items in the cart!</div>;
   } else {
     return (
-      <ol>
-        {cartList.map(cartItem => (
-          <li key={cartItem.id}>
-            <div>{cartItem.title}</div>
-            <div>Quantity: {cartItem.quantity}</div>
-          </li>
-        ))}
-      </ol>
-    )
+      <div>
+        <ol>
+          {cartList.map((cartItem) => (
+            <li key={cartItem.id}>
+              <div>{cartItem.title}</div>
+              <div className={styles.cart}>
+                Rs:{cartItem.price} * {cartItem.quantity} = Rs:
+                {cartItem.price * cartItem.quantity}
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div>Cart Total:{cartTotal}</div>
+      </div>
+    );
   }
 }
 
