@@ -25,6 +25,7 @@ function App() {
    * }
    */
   const [cart, setCart] = useState({});
+  const [showCart, setShowCart] = useState(false);
 
   function increaseQuantity(product) {
     const newCart = { ...cart };
@@ -66,7 +67,10 @@ function App() {
       value={{ cart, increaseQuantity, decreaseQuantity }}
     >
       <div>
-        <Cart />
+        <button onClick={() => setShowCart(!showCart)}>
+          {showCart ? 'Close cart' : 'Open cart'}
+        </button>
+        {showCart ? <Cart /> : null}
         <ProductList />
       </div>
     </CartContext.Provider>

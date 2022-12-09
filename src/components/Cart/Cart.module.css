@@ -3,3 +3,14 @@
   border: 2px solid black;
   padding: 20px;
 }
+
+.cartItem {
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+
+.cartItemRow {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 0;
+}

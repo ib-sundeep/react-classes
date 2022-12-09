@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import App from './App';
 
 import './index.css';
+import store from './store';
 
 // import CountDown from './components/CountDown';
 
@@ -15,7 +17,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // 2. File extension should .jsx
 // 3. Component also should use PascalCase
 root.render(
-  <App />
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
 
 // We will start at 9:05pm
