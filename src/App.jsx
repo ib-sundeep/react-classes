@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
 import CartContext from './contexts/CartContext';
+import ReduxCart from './components/ReduxCart';
 
 
 // oldCart === newCart
@@ -70,7 +71,8 @@ function App() {
         <button onClick={() => setShowCart(!showCart)}>
           {showCart ? 'Close cart' : 'Open cart'}
         </button>
-        {showCart ? <Cart /> : null}
+        {/* {showCart ? <Cart /> : null} */}
+        {showCart ? <ReduxCart /> : null}
         <ProductList />
       </div>
     </CartContext.Provider>
