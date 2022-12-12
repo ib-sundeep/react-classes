@@ -145,4 +145,6 @@ const store = createStore(cartReducer);
 //   store.setState(newState);
 // }
 
+console.log(store.getState());
+
 export default store;

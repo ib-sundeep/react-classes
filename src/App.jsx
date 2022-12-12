@@ -4,6 +4,7 @@ import ProductList from './components/ProductList';
 import Cart from './components/Cart';
 import CartContext from './contexts/CartContext';
 import ReduxCart from './components/ReduxCart';
+import Categories from './components/Categories';
 
 
 // oldCart === newCart
@@ -73,6 +74,7 @@ function App() {
         </button>
         {/* {showCart ? <Cart /> : null} */}
         {showCart ? <ReduxCart /> : null}
+        <Categories />
         <ProductList />
       </div>
     </CartContext.Provider>

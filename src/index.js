@@ -4,7 +4,10 @@ import { Provider } from 'react-redux';
 import App from './App';
 
 import './index.css';
-import store from './store';
+// import store from './store';
+import store from './store/index.js';
+
+// console.log('Multiple reducers', store1.getState());
 
 // import CountDown from './components/CountDown';
 

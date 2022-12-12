@@ -13,7 +13,7 @@ import styles from './ReduxCart.module.css';
 // [{ id: '1' }, { id: '2' }]
 
 function Cart() {
-  const cart = useSelector(state => state.items);
+  const cart = useSelector(state => state.cart.items);
   const cartList = Object.values(cart);
 
   function getTotalPrice() {

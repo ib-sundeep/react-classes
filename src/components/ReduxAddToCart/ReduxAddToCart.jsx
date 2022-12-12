@@ -5,7 +5,7 @@ import { addToCart, removeFromCart } from '../../store';
 function AddToCart({ product }) {
   const dispatch = useDispatch();
   const quantity = useSelector(state => {
-    return state.items[product.id]?.quantity || 0;
+    return state.cart.items[product.id]?.quantity || 0;
   })
 
   function increment() {
