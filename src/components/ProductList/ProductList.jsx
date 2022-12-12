@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import ProductCard from "../ProductCard";
 
@@ -33,6 +34,10 @@ function ProductList() {
 
   const [error, setError] = useState(null);
 
+  const selectedCategoryId = useSelector(
+    state => state.categories.selectedCategoryId
+  );
+
   // `useEffect` should be used whenever you need to 
   // detect some react lifecycle event.
   useEffect(() => {
@@ -53,7 +58,9 @@ function ProductList() {
 
     async function loadProducts(a) {
       try {
-        const response = await fetch('http://localhost:3001/products');
+        const response = await fetch(
+          `http://localhost:3001/categories/${selectedCategoryId}/products`
+        );
         const result = await response.json();
         setIsLoading(false);
         setProducts(result);
@@ -63,12 +70,16 @@ function ProductList() {
       }
     }
 
+    if (!selectedCategoryId) return;
+
     loadProducts();
-  }, []);
+  }, [selectedCategoryId]);
 
   // Falsy values:  false, null, undefined, '', 0
   // Truthy values: Any other than falsy
-  if (error) {
+  if (!selectedCategoryId) {
+    return <div>Select a category</div>
+  } else if (error) {
     return <div>{error.message}</div>;
   } else if (isLoading) {
     return <div>Loading...</div>;

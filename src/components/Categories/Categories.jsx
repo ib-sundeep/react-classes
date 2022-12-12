@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { loadCategories } from '../../store/categories';
+import CategoryLink from '../CategoryLink';
+import styles from './Categories.module.css'
 
 function Categories() {
   const dispatch = useDispatch();
@@ -43,9 +45,9 @@ function Categories() {
     return <div>Failed to load categories</div>
   } else {
     return (
-      <ul>
+      <ul className={styles.list}>
         {categories.categories.map(category => (
-          <li key={category.id}>{category.name}</li>
+          <CategoryLink key={category.id} category={category} />
         ))}
       </ul>
     );

@@ -1,0 +1,8 @@
+.link {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.selected {
+  color: blue;
+}
