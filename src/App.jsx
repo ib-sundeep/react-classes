@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import CartContext from './contexts/CartContext';
 import CartPage from './pages/CartPage';
 import NotFoundPage from './pages/NotFoundPage';
+import OrdersPage from './pages/OrdersPage';
 import ProductsPage from './pages/ProductsPage';
 
 
@@ -84,6 +84,11 @@ function App() {
           exact={true}
           path="/cart"
           component={CartPage}
+        />
+        <Route
+          exact={true}
+          path="/orders"
+          component={OrdersPage}
         />
         <Route component={NotFoundPage} />
       </Switch>
