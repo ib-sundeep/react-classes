@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { loadCategories } from '../../store/categories';
 import CategoryLink from '../CategoryLink';
+import ToggleCart from '../ToggleCart/ToggleCart';
 import styles from './Categories.module.css'
 
 function Categories() {
@@ -45,11 +46,14 @@ function Categories() {
     return <div>Failed to load categories</div>
   } else {
     return (
-      <ul className={styles.list}>
-        {categories.categories.map(category => (
-          <CategoryLink key={category.id} category={category} />
-        ))}
-      </ul>
+      <div className={styles.root}>
+        <ul className={styles.list}>
+          {categories.categories.map(category => (
+            <CategoryLink key={category.id} category={category} />
+          ))}
+        </ul>
+        <ToggleCart />
+      </div>
     );
   }
 }

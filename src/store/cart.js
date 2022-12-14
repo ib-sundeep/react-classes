@@ -19,6 +19,18 @@ export function removeFromCart(product) {
   };
 }
 
+export function toggleCart() {
+  return (dispatch, getState) => {
+    const { isCartOpen } = getState().cart;
+
+    if (isCartOpen) {
+      dispatch({ type: HIDE_CART });
+    } else {
+      dispatch({ type: SHOW_CART });
+    }
+  }
+}
+
 function cartReducer(state = { items: {}, isCartOpen: false }, action) {
   switch (action.type) {
     case SHOW_CART:

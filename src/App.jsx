@@ -5,6 +5,7 @@ import Cart from './components/Cart';
 import CartContext from './contexts/CartContext';
 import ReduxCart from './components/ReduxCart';
 import Categories from './components/Categories';
+import { useSelector } from 'react-redux';
 
 
 // oldCart === newCart
@@ -27,7 +28,7 @@ function App() {
    * }
    */
   const [cart, setCart] = useState({});
-  const [showCart, setShowCart] = useState(false);
+  const showCart = useSelector(state => state.cart.isCartOpen);
 
   function increaseQuantity(product) {
     const newCart = { ...cart };
@@ -69,10 +70,6 @@ function App() {
       value={{ cart, increaseQuantity, decreaseQuantity }}
     >
       <div>
-        <button onClick={() => setShowCart(!showCart)}>
-          {showCart ? 'Close cart' : 'Open cart'}
-        </button>
-        {/* {showCart ? <Cart /> : null} */}
         {showCart ? <ReduxCart /> : null}
         <Categories />
         <ProductList />
