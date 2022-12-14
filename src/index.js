@@ -22,9 +22,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // 3. Component also should use PascalCase
 root.render(
   <BrowserRouter>
-  <Provider store={store}>
-    <App />
-  </Provider>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>
 );
 

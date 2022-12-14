@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-
-import ProductList from './components/ProductList';
-import Cart from './components/Cart';
-import CartContext from './contexts/CartContext';
-import ReduxCart from './components/ReduxCart';
-import Categories from './components/Categories';
 import { useSelector } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+
+import CartContext from './contexts/CartContext';
+import CartPage from './pages/CartPage';
+import NotFoundPage from './pages/NotFoundPage';
+import ProductsPage from './pages/ProductsPage';
 
 
 // oldCart === newCart
@@ -28,7 +28,6 @@ function App() {
    * }
    */
   const [cart, setCart] = useState({});
-  const showCart = useSelector(state => state.cart.isCartOpen);
 
   function increaseQuantity(product) {
     const newCart = { ...cart };
@@ -69,11 +68,25 @@ function App() {
     <CartContext.Provider
       value={{ cart, increaseQuantity, decreaseQuantity }}
     >
-      <div>
-        {showCart ? <ReduxCart /> : null}
-        <Categories />
-        <ProductList />
-      </div>
+      <Switch>
+        <Route
+          exact={true}
+          path="/"
+          component={ProductsPage}
+        />
+        <Route
+          exact={true}
+          path="/categories/:categoryId"
+          component={ProductsPage}
+        />
+
+        <Route
+          exact={true}
+          path="/cart"
+          component={CartPage}
+        />
+        <Route component={NotFoundPage} />
+      </Switch>
     </CartContext.Provider>
   )
 }

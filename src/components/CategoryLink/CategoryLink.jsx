@@ -1,20 +1,21 @@
 import React, { memo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './CategoryLink.module.css';
 
 function CategoryLink({ category }) {
-  const dispatch = useDispatch();
-  const isSelected = useSelector(
-    state => state.categories.selectedCategoryId === category.id
-  );
+  // const dispatch = useDispatch();
+  // const isSelected = useSelector(
+  //   state => state.categories.selectedCategoryId === category.id
+  // );
 
-  function handleCategorySelection() {
-    dispatch({
-      type: 'SET_SELECTED_CATEGORY',
-      payload: category.id
-    });
-  }
+  // function handleCategorySelection() {
+  //   dispatch({
+  //     type: 'SET_SELECTED_CATEGORY',
+  //     payload: category.id
+  //   });
+  // }
 
   // console.log({ selectedCategoryId, ca });
   // const isSelected = selectedCategoryId === category.id;
@@ -22,11 +23,14 @@ function CategoryLink({ category }) {
   console.log('CategoryLink rendered', category.id);
 
   return (
-    <li
-      className={`${styles.link} ${isSelected ? styles.selected : ''}`}
-      onClick={handleCategorySelection}
-    >
-      {category.name}
+    <li>
+      <NavLink
+        className={styles.link}
+        activeClassName={styles.linkActive}
+        to={`/categories/${category.id}`}
+      >
+        {category.name}
+      </NavLink>
     </li>
   )
 }

@@ -1,5 +1,4 @@
 import { memo, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 import ProductCard from "../ProductCard";
 
@@ -16,7 +15,7 @@ import ProductCard from "../ProductCard";
 
 // Products is set
 // API call triggered - 
-function ProductList() {
+function ProductList({ categoryId }) {
   console.log('ProductList rendered');
   // `useState` should be used when you need a dynamic variable
   // which your UI logic depends or the variable can cause some
@@ -33,10 +32,6 @@ function ProductList() {
   const [products, setProducts] = useState([]);
 
   const [error, setError] = useState(null);
-
-  const selectedCategoryId = useSelector(
-    state => state.categories.selectedCategoryId
-  );
 
   // `useEffect` should be used whenever you need to 
   // detect some react lifecycle event.
@@ -59,7 +54,7 @@ function ProductList() {
     async function loadProducts(a) {
       try {
         const response = await fetch(
-          `http://localhost:3001/categories/${selectedCategoryId}/products`
+          `http://localhost:3001/categories/${categoryId}/products`
         );
         const result = await response.json();
         setIsLoading(false);
@@ -70,20 +65,20 @@ function ProductList() {
       }
     }
 
-    if (!selectedCategoryId) return;
+    if (!categoryId) return;
 
     loadProducts();
-  }, [selectedCategoryId]);
+  }, [categoryId]);
 
   // Falsy values:  false, null, undefined, '', 0
   // Truthy values: Any other than falsy
-  if (!selectedCategoryId) {
+  if (!categoryId) {
     return <div>Select a category</div>
   } else if (error) {
     return <div>{error.message}</div>;
   } else if (isLoading) {
     return <div>Loading...</div>;
-  } else {
+  } else if (products.length > 0) {
     return (
       <div>
         {/* [Nodes] */}
@@ -99,6 +94,8 @@ function ProductList() {
         }
       </div>
     );
+  } else {
+    return <div>No products found. Try different category!</div>
   }
 }
 
