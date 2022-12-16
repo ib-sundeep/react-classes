@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import CartContext from './contexts/CartContext';
+import BestPracticesPage from './pages/BestPracticesPage';
 import CartPage from './pages/CartPage';
 import NotFoundPage from './pages/NotFoundPage';
 import OrdersPage from './pages/OrdersPage';
@@ -89,6 +90,11 @@ function App() {
           exact={true}
           path="/orders"
           component={OrdersPage}
+        />
+        <Route
+          exact={true}
+          path="/best-practices"
+          component={BestPracticesPage}
         />
         <Route component={NotFoundPage} />
       </Switch>
