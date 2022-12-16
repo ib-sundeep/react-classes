@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import CartContext from './contexts/CartContext';
+import { usePersistentCart } from './hooks/usePersistentCart';
 import BestPracticesPage from './pages/BestPracticesPage';
 import CartPage from './pages/CartPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -64,6 +65,8 @@ function App() {
   }
 
   console.log('App rendered');
+
+  usePersistentCart();
 
   return (
     <CartContext.Provider

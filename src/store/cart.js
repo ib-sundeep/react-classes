@@ -90,8 +90,11 @@ export function checkoutSuccess() {
   }
 }
 
+// LocalStorage/SessionStorage -> Max 5MB
+// Cookie -> Max 4KB
+
 function cartReducer(state = {
-  items: {},
+  items: JSON.parse(localStorage.getItem('cart_state') || '{}'),
   isCartOpen: false,
   isSubmitting: false,
   isSubmitSuccess: false,

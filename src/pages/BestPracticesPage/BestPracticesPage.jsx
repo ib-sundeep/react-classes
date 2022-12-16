@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Accordion from '../../components/Accordion';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const list = [
   'Render list item 1',
@@ -14,29 +15,7 @@ const list = [
 // <Component />
 // <Component>My children</Component>
 function BestPracticesPage() {
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  })
-
-  // disposers = [() => {
-  //   window.removeEventListener('resize', handleResize);
-  // }]
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    }
-  }, []);
+  const { width, height } = useWindowSize();
 
   return (
     <div>
@@ -51,10 +30,10 @@ function BestPracticesPage() {
           {list.map((item, index) => <li key={index}>{item}</li>)}
         </Accordion>
       </Accordion>
-      {windowSize.width > 580 ? '<TableLayout />' : '<MobileLayout />'}
+      {width > 580 ? '<TableLayout />' : '<MobileLayout />'}
       <div>
-        <div>Window width: {windowSize.width}</div>
-        <div>Window height: {windowSize.height}</div>
+        <div>Window width: {width}</div>
+        <div>Window height: {height}</div>
       </div>
       <Link to="/">Home</Link>
     </div>
