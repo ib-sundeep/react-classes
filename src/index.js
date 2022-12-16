@@ -7,6 +7,7 @@ import App from './App';
 import './index.css';
 // import store from './store';
 import store from './store/index.js';
+import isItNumber, { isEven, isOdd, NUM_PRODUCTS } from './util';
 
 // console.log('Multiple reducers', store1.getState());
 
@@ -26,6 +27,12 @@ root.render(
       <App />
     </Provider>
   </BrowserRouter>
+);
+
+console.log(
+  isOdd(3), isOdd(4), isEven(3), isEven(4),
+  isItNumber(1), isItNumber('2'),
+  NUM_PRODUCTS
 );
 
 // We will start at 9:05pm

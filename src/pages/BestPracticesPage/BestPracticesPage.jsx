@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import Accordion from '../../components/Accordion';
@@ -16,9 +17,16 @@ const list = [
 // <Component>My children</Component>
 function BestPracticesPage() {
   const { width, height } = useWindowSize();
+  const divRef = useRef();
+  const inputRef = useRef();
+
+  useEffect(() => {
+    const divFromId = document.getElementById('my-div');
+    console.log(divRef.current, divFromId);
+  })
 
   return (
-    <div>
+    <>
       <Accordion heading="My Accordion">
         <ul>
           {list.map((item, index) => <li key={index}>{item}</li>)}
@@ -30,13 +38,14 @@ function BestPracticesPage() {
           {list.map((item, index) => <li key={index}>{item}</li>)}
         </Accordion>
       </Accordion>
-      {width > 580 ? '<TableLayout />' : '<MobileLayout />'}
-      <div>
+      <div id="my-div" ref={divRef}>
         <div>Window width: {width}</div>
         <div>Window height: {height}</div>
       </div>
+      <input ref={inputRef} />
+      <button onClick={() => inputRef.current.focus()}>Focus Input</button>
       <Link to="/">Home</Link>
-    </div>
+    </>
   );
 }
 

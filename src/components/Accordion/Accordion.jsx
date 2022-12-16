@@ -12,6 +12,16 @@ function Accordion({
 }) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
+  // Not allowed
+  // [1, 2, 3].forEach(o => {
+  //   const [value, setValue] = useState(o);
+  // })
+  
+  // Not allowed
+  // if (isExpanded) {
+  //   const [isVisible, setIsVisible] = useState(false);
+  // }
+
   function handleAccordionToggle() {
     setIsExpanded(!isExpanded);
   }
