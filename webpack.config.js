@@ -10,7 +10,8 @@ module.exports = {
     filename: 'bundle.js',
   },
   devServer: {
-    port: 5001
+    port: 5001,
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -35,6 +36,14 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        exclude: /\.module\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' }
+        ]
       }
     ]
   },
@@ -44,6 +53,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      publicPath: '/'
     })
   ]
 }

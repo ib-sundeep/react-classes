@@ -1,0 +1,103 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Mobiles"
+    },
+    {
+      "id": 2,
+      "name": "Laptops"
+    },
+    {
+      "id": 3,
+      "name": "Clothes"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "categoryId": 1,
+      "title": "Apple iPhone 14",
+      "price": 100000
+    },
+    {
+      "id": 2,
+      "categoryId": 1,
+      "title": "Apple iPhone 13",
+      "price": 70000
+    },
+    {
+      "id": 3,
+      "categoryId": 1,
+      "title": "Google Pixel 7",
+      "price": 50000
+    },
+    {
+      "id": 4,
+      "categoryId": 1,
+      "title": "Nokia 1100",
+      "price": 2000
+    },
+    {
+      "id": 5,
+      "title": "Samsung Galaxy S10",
+      "price": 100000
+    },
+    {
+      "id": 6,
+      "categoryId": 1,
+      "title": "Sony Xperia S10",
+      "price": 100000
+    },
+    {
+      "id": 7,
+      "categoryId": 2,
+      "title": "Apple Macbook Air M1",
+      "price": 120000
+    },
+    {
+      "id": 8,
+      "categoryId": 2,
+      "title": "HP Pavilion E5",
+      "price": 70000
+    },
+    {
+      "id": 9,
+      "categoryId": 3,
+      "title": "Tshirt",
+      "price": 1000
+    },
+    {
+      "id": 10,
+      "categoryId": 3,
+      "title": "Jeans",
+      "price": 7000
+    }
+  ],
+  "orders": [
+    {
+      "products": [
+        {
+          "id": 1,
+          "categoryId": 1,
+          "title": "Apple iPhone 14",
+          "price": 100000,
+          "quantity": 1
+        }
+      ],
+      "subTotal": 100000,
+      "discount": 0,
+      "tax": 18000,
+      "total": 118000,
+      "id": 1
+    },
+    {
+      "products": [],
+      "subTotal": 0,
+      "discount": 0,
+      "tax": 0,
+      "total": 0,
+      "id": 2
+    }
+  ]
+}
