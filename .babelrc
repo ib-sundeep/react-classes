@@ -1,0 +1,6 @@
+{
+  "presets": [
+    "@babel/preset-env", // Creates backward compatible
+    "@babel/preset-react"
+  ]
+}

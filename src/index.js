@@ -1,9 +1,14 @@
-import HelloWorld from "./HelloWorld";
 
-const root = document.getElementById('root');
-root.innerHTML = HelloWorld;
+import ReactDOM from 'react-dom';
+import React from 'react';
 
-// Webpack is a bundler
+import App from './App';
 
-// 
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+root.render(<App />);
 
+
+// babel plugin -> specify logic of how to convert a single syntax
+// babel presets -> Collection babel plugin
